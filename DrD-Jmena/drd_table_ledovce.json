@@ -1,4 +1,4 @@
-,{
+{
     "type": "table",
     "name": "ledovce",
     "database": "drd",
@@ -35,7 +35,7 @@
     "pad4": "Plazivý ledovec",
     "pad5": "Plazivý ledovci",
     "pad6": "Plazivém ledovci",
-    "pad7": "Plazivým ledovec"
+    "pad7": "Plazivým ledovcem"
 },
 {
     "id": "4",
