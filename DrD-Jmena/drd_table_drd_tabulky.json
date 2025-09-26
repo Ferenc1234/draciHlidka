@@ -1,0 +1,189 @@
+,{
+    "type": "table",
+    "name": "drd_tabulky",
+    "database": "drd",
+    "data": 
+[
+{
+    "id": "1",
+    "nazev": "JMENA",
+    "razeni": "JMENO, POHLAVI",
+    "slova": null
+},
+{
+    "id": "2",
+    "nazev": "PRIJMENI",
+    "razeni": "PRIJMENI",
+    "slova": null
+},
+{
+    "id": "3",
+    "nazev": "PRIDOMKY",
+    "razeni": "PRIDOMEK, POHLAVI",
+    "slova": null
+},
+{
+    "id": "4",
+    "nazev": "DOMY",
+    "razeni": "NAZEV",
+    "slova": "domek\ndům"
+},
+{
+    "id": "5",
+    "nazev": "HORY",
+    "razeni": "NAZEV",
+    "slova": "hora\nkopec\nkopeček\nvrch\nvršek"
+},
+{
+    "id": "6",
+    "nazev": "HRADY",
+    "razeni": "NAZEV",
+    "slova": "hrad\nhrádek\nopevnění\npevnost\npevnůstka\ntvrz"
+},
+{
+    "id": "7",
+    "nazev": "JESKYNE",
+    "razeni": "NAZEV",
+    "slova": "jeskyně"
+},
+{
+    "id": "8",
+    "nazev": "JEZERA",
+    "razeni": "NAZEV",
+    "slova": "jezero\njezírko\nrybník\nrybníček"
+},
+{
+    "id": "9",
+    "nazev": "LEDOVCE",
+    "razeni": "NAZEV",
+    "slova": "ledovec"
+},
+{
+    "id": "10",
+    "nazev": "LESY",
+    "razeni": "NAZEV",
+    "slova": "háj\nhvozd\nles\nlesíček\nlesík\nstromy"
+},
+{
+    "id": "11",
+    "nazev": "MESTA",
+    "razeni": "NAZEV",
+    "slova": "město\nves\nvesnice"
+},
+{
+    "id": "12",
+    "nazev": "MORE",
+    "razeni": "NAZEV",
+    "slova": "moře\noceán\nvody"
+},
+{
+    "id": "13",
+    "nazev": "OSTROVY",
+    "razeni": "NAZEV",
+    "slova": "ostrov\nostrůvek"
+},
+{
+    "id": "14",
+    "nazev": "PLANE",
+    "razeni": "NAZEV",
+    "slova": "pláň"
+},
+{
+    "id": "15",
+    "nazev": "POHORI",
+    "razeni": "NAZEV",
+    "slova": "hory\npohoří"
+},
+{
+    "id": "16",
+    "nazev": "POUSTE",
+    "razeni": "NAZEV",
+    "slova": "poušť"
+},
+{
+    "id": "17",
+    "nazev": "PRUSMYKY",
+    "razeni": "NAZEV",
+    "slova": "průsmyk"
+},
+{
+    "id": "18",
+    "nazev": "REKY",
+    "razeni": "NAZEV",
+    "slova": "potok\npotůček\nřeka\nříčka"
+},
+{
+    "id": "19",
+    "nazev": "ROKLE",
+    "razeni": "NAZEV",
+    "slova": "rokle\nroklina\nroklinka"
+},
+{
+    "id": "20",
+    "nazev": "SOUTESKY",
+    "razeni": "NAZEV",
+    "slova": "soutěska"
+},
+{
+    "id": "21",
+    "nazev": "UDOLI",
+    "razeni": "NAZEV",
+    "slova": "dolina\núdolí"
+},
+{
+    "id": "22",
+    "nazev": "UTESY",
+    "razeni": "NAZEV",
+    "slova": "útes"
+},
+{
+    "id": "23",
+    "nazev": "ZATOKY",
+    "razeni": "NAZEV",
+    "slova": "zátočina\nzátoka"
+},
+{
+    "id": "24",
+    "nazev": "ZEME",
+    "razeni": "NAZEV",
+    "slova": "říše\nzemě"
+},
+{
+    "id": "25",
+    "nazev": "STEPI",
+    "razeni": "NAZEV",
+    "slova": "step"
+},
+{
+    "id": "26",
+    "nazev": "BRODY",
+    "razeni": "NAZEV",
+    "slova": "brod"
+},
+{
+    "id": "27",
+    "nazev": "ULICE",
+    "razeni": "NAZEV",
+    "slova": "náměstí\nnáměstíčko\nulice\nulička"
+},
+{
+    "id": "28",
+    "nazev": "MYSY",
+    "razeni": "NAZEV",
+    "slova": "mys"
+},
+{
+    "id": "29",
+    "nazev": "LODE",
+    "razeni": "NAZEV",
+    "slova": "kocábka\nkoráb\nloď\nloďka"
+},
+{
+    "id": "30",
+    "nazev": "BAZINY",
+    "razeni": "NAZEV",
+    "slova": "bažina\nblata\nmokřad"
+}
+]
+
+}
