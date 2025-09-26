@@ -1,0 +1,7 @@
+# Generated SQLite database
+jmena.sqlite
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
