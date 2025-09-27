@@ -1,0 +1,53 @@
+[{
+    "id": "7452",
+    "jmeno": "Calim",
+    "pohlavi": "M",
+    "ekvivalence": "121",
+    "pad2": "Calima",
+    "pad3": "Calimovi",
+    "pad4": "Calima",
+    "pad5": "Calime",
+    "pad6": "Calimovi",
+    "pad7": "Calimem",
+    "clovek": "1",
+    "elf": "1",
+    "trpaslik": "0",
+    "pulcik": "0",
+    "barbar": "1",
+    "obr": "0",
+    "gnom": "0",
+    "valecnik": "1",
+    "hranicar": "1",
+    "alchymista": "1",
+    "klerik": "0",
+    "kouzelnik": "1",
+    "zlodej": "1"
+},
+
+
+{
+    "id": "7452",
+    "jmeno": "Calim",
+    "pohlavi": "M",
+    "ekvivalence": "121",
+    "pad2": "Calima",
+    "pad3": "Calimovi",
+    "pad4": "Calima",
+    "pad5": "Calime",
+    "pad6": "Calimovi",
+    "pad7": "Calimem",
+    "clovek": "1",
+    "elf": "1",
+    "trpaslik": "0",
+    "hobit": "0",
+    "kuduk": "0",
+    "barbar": "1",
+    "kroll": "0",
+    "valecnik": "1",
+    "hranicar": "1",
+    "alchymista": "1",
+    "kouzelnik": "1",
+    "zlodej": "1"
+}
+]
+

@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DrD Generátor Náhodných Položek</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 40px;
+            font-size: 1.1em;
+        }
+
+        .generator-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            background: white;
+            transition: border-color 0.3s ease;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .result {
+            margin-top: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 10px;
+            color: white;
+            text-align: center;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .result-content {
+            font-size: 1.4em;
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            color: #667eea;
+            font-style: italic;
+        }
+
+        .error {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 8px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .stats {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎲 DrD Generátor</h1>
+        <p class="subtitle">Náhodný generátor položek z databáze Dračí hlídky</p>
+        
+        <div class="generator-section">
+            <div class="form-group">
+                <label for="tableSelect">Vyberte kategorii:</label>
+                <select id="tableSelect">
+                    <option value="">-- Vyberte kategorii --</option>
+                    <option value="mesta">🏰 Města</option>
+                    <option value="jmena">👤 Jména</option>
+                    <option value="prijmeni">👥 Příjmení</option>
+                    <option value="zeme">🌍 Země</option>
+                    <option value="hory">🏔️ Hory</option>
+                    <option value="reky">🌊 Řeky</option>
+                    <option value="jezera">🏞️ Jezera</option>
+                    <option value="lesy">🌲 Lesy</option>
+                    <option value="hrady">🏯 Hrady</option>
+                    <option value="ulice">🛤️ Ulice</option>
+                    <option value="ostrovy">🏝️ Ostrovy</option>
+                    <option value="pouste">🏜️ Pouště</option>
+                    <option value="udoli">⛰️ Údolí</option>
+                    <option value="jeskyne">🕳️ Jeskyně</option>
+                    <option value="lode">⛵ Lodě</option>
+                    <option value="baziny">🐸 Bažiny</option>
+                    <option value="brody">🌉 Brody</option>
+                    <option value="domy">🏠 Domy</option>
+                    <option value="ledovce">🧊 Ledovce</option>
+                    <option value="more">🌊 Moře</option>
+                    <option value="mysy">🗻 Mysy</option>
+                    <option value="pohori">🏔️ Pohoří</option>
+                    <option value="prusmyky">🛤️ Průsmyky</option>
+                    <option value="rokle">⛰️ Rokle</option>
+                    <option value="soutesky">🗻 Soutěsky</option>
+                    <option value="stepi">🌾 Stepi</option>
+                    <option value="utesy">🗿 Útesy</option>
+                    <option value="zatoky">🏖️ Zátoky</option>
+                </select>
+            </div>
+            
+            <button class="btn" onclick="generateRandom()">🎲 Generovat náhodnou položku</button>
+            
+            <div class="loading" id="loading">
+                Načítám data...
+            </div>
+        </div>
+
+        <div class="result" id="result" style="display: none;">
+            <div class="result-content" id="resultContent">
+                Vyberte kategorii a stiskněte tlačítko pro generování
+            </div>
+        </div>
+
+        <div class="stats" id="stats" style="display: none;">
+            <div class="stat">
+                <div class="stat-number" id="totalEntries">0</div>
+                <div class="stat-label">Celkem položek</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number" id="generatedCount">0</div>
+                <div class="stat-label">Vygenerováno</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>🐉 Dračí hlídka • Databáze pro D&D • GitHub Pages</p>
+        </div>
+    </div>
+
+    <script>
+        let currentData = null;
+        let generatedCount = 0;
+        const baseUrl = 'DrD-Jmena/drd_table_';
+
+        async function loadTableData(tableName) {
+            try {
+                document.getElementById('loading').style.display = 'block';
+                
+                const response = await fetch(`${baseUrl}${tableName}.json`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                document.getElementById('loading').style.display = 'none';
+                
+                return data.data || data; // Handle both formats
+            } catch (error) {
+                document.getElementById('loading').style.display = 'none';
+                console.error('Error loading data:', error);
+                throw error;
+            }
+        }
+
+        async function generateRandom() {
+            const select = document.getElementById('tableSelect');
+            const selectedTable = select.value;
+            
+            if (!selectedTable) {
+                showResult('Prosím vyberte kategorii!', 'error');
+                return;
+            }
+
+            try {
+                // Load data if not already loaded or if different table
+                if (!currentData || currentData.tableName !== selectedTable) {
+                    currentData = {
+                        tableName: selectedTable,
+                        data: await loadTableData(selectedTable)
+                    };
+                    
+                    // Update stats
+                    document.getElementById('totalEntries').textContent = 
+                        currentData.data.length.toLocaleString('cs-CZ');
+                    document.getElementById('stats').style.display = 'flex';
+                }
+
+                // Generate random item
+                if (currentData.data.length === 0) {
+                    showResult('Tabulka je prázdná!', 'error');
+                    return;
+                }
+
+                const randomIndex = Math.floor(Math.random() * currentData.data.length);
+                const randomItem = currentData.data[randomIndex];
+                
+                // Extract the main name/text from the item
+                let resultText = '';
+                
+                if (selectedTable === 'jmena') {
+                    // For names, show the name with some additional info
+                    resultText = randomItem.jmeno || randomItem.name || 'Neznámé jméno';
+                    if (randomItem.rod) {
+                        const rod = randomItem.rod === 'M' ? '♂️' : randomItem.rod === 'Z' ? '♀️' : '';
+                        resultText += ` ${rod}`;
+                    }
+                } else if (selectedTable === 'ulice') {
+                    // For streets, show the nominative case
+                    resultText = randomItem.pad1 || randomItem.nazev || randomItem.name || 'Neznámá ulice';
+                } else {
+                    // For other items, try common field names
+                    resultText = randomItem.nazev || randomItem.name || randomItem.jmeno || 
+                                randomItem.pad1 || Object.values(randomItem)[0] || 'Neznámá položka';
+                }
+
+                generatedCount++;
+                document.getElementById('generatedCount').textContent = generatedCount;
+                
+                showResult(resultText, 'success');
+
+            } catch (error) {
+                showResult(`Chyba při načítání dat: ${error.message}`, 'error');
+            }
+        }
+
+        function showResult(text, type = 'success') {
+            const resultDiv = document.getElementById('result');
+            const resultContent = document.getElementById('resultContent');
+            
+            resultContent.textContent = text;
+            resultDiv.className = `result ${type}`;
+            resultDiv.style.display = 'flex';
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add keyboard shortcut
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    generateRandom();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
