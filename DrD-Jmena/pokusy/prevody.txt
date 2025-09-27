@@ -1,0 +1,18 @@
+
+//priklad pro jmeno: "Calim" - pokud je u rasy/povolani 1 hodi se, pokud 0, tak se nehodi
+
+    "clovek": "1",      => clovek
+    "elf": "1",         => elf
+    "trpaslik": "0",    => trpaslik
+    "hobit": "0",       => pulcik
+    "kuduk": "0",       =>
+    "barbar": "1",      => barbar
+    "kroll": "0",       => obr
+    "valecnik": "1",    => valecnik
+    "hranicar": "1",    => hranicar
+    "alchymista": "1",  => alchymista
+    "kouzelnik": "1",   => kouzelnik
+    "zlodej": "1"       => zlodej
+                        => klerik
+                        => gnom
+                        
