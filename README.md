@@ -4,9 +4,9 @@
 
 ## Database Statistics
 
-*Last updated: 2025-09-27 12:20:59*
+*Last updated: 2025-09-27 13:54:02*
 
-Total entries across all tables: **41,107**
+Total entries across all tables: **61,927**
 
 | Table | Entries | Description |
 |-------|---------|-------------|
@@ -21,6 +21,7 @@ Total entries across all tables: **41,107**
 | drd_table_jezera.json | 162 | Lakes |
 | drd_table_jmena.json | 20,820 | Names |
 | drd_table_jmena_ekvivalence.json | 4,077 | Name Equivalents |
+| drd_table_jmena_upraveno.json | 20,820 | Jmena_Upraveno |
 | drd_table_ledovce.json | 36 | Glaciers |
 | drd_table_lesy.json | 171 | Forests |
 | drd_table_lode.json | 124 | Ships |
