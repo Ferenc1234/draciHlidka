@@ -1,3 +1,4 @@
+
 # JavaScript API a Database Stats pro GitHub Pages
 
 Tento projekt obsahuje jednoduché client-side API v JavaScriptu a systém pro generování statistik databáze DrD.
