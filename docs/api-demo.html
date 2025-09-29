@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript API Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .endpoint {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-left: 4px solid #007bff;
+            border-radius: 4px;
+        }
+        
+        .response {
+            background: #e9ecef;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            margin-top: 10px;
+        }
+        
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px 0;
+        }
+        
+        button:hover {
+            background: #0056b3;
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        
+        h2 {
+            color: #007bff;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>JavaScript API Demo pro GitHub Pages</h1>
+        
+        <p>Toto je demonstrace jednoduchého client-side API v JavaScriptu, které funguje na GitHub Pages.</p>
+        
+        <h2>Dostupné endpointy:</h2>
+        
+        <div class="endpoint">
+            <h3>GET /</h3>
+            <p>Vrací uvítací zprávu s časovým razítkem</p>
+            <button onclick="testEndpoint('/')">Otestovat</button>
+            <div id="response-root" class="response" style="display:none;"></div>
+        </div>
+        
+        <div class="endpoint">
+            <h3>GET /data</h3>
+            <p>Vrací ukázková data s položkami</p>
+            <button onclick="testEndpoint('/data')">Otestovat</button>
+            <div id="response-data" class="response" style="display:none;"></div>
+        </div>
+        
+        <div class="endpoint">
+            <h3>GET /status</h3>
+            <p>Vrací stav API a seznam všech endpointů</p>
+            <button onclick="testEndpoint('/status')">Otestovat</button>
+            <div id="response-status" class="response" style="display:none;"></div>
+        </div>
+        
+        <div class="endpoint">
+            <h3>GET /neexistuje</h3>
+            <p>Test neexistujícího endpointu (vrací 404)</p>
+            <button onclick="testEndpoint('/neexistuje')">Otestovat</button>
+            <div id="response-neexistuje" class="response" style="display:none;"></div>
+        </div>
+        
+        <h2>Jak používat:</h2>
+        <div class="response">
+// Použití API v JavaScriptu:
+const response = api.get('/');
+console.log(response);
+
+// Nebo můžete vytvořit novou instanci:
+const myAPI = new SimpleAPI();
+const data = myAPI.get('/data');
+        </div>
+    </div>
+
+    <script src="api.js"></script>
+    <script>
+        function testEndpoint(path) {
+            const response = api.get(path);
+            const elementId = 'response-' + (path === '/' ? 'root' : path.substring(1));
+            const responseElement = document.getElementById(elementId);
+            
+            responseElement.textContent = JSON.stringify(response, null, 2);
+            responseElement.style.display = 'block';
+            
+            // Scroll to response
+            responseElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    </script>
+</body>
+</html>

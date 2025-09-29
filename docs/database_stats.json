@@ -1,0 +1,727 @@
+{
+  "generated_at": "2025-09-29T08:30:36.725528",
+  "total_files": 37,
+  "total_records": 61929,
+  "tables": {
+    "database": {
+      "filename": "drd_database.json",
+      "size_bytes": 159,
+      "type": "array",
+      "name": "database",
+      "database": "drd",
+      "record_count": 2,
+      "fields": [
+        "type",
+        "version",
+        "comment"
+      ],
+      "field_count": 3
+    },
+    "baziny": {
+      "filename": "drd_table_baziny.json",
+      "size_bytes": 10958,
+      "type": "table",
+      "name": "baziny",
+      "database": "drd",
+      "record_count": 41,
+      "fields": [
+        "id",
+        "nazev",
+        "rod",
+        "pad2",
+        "pad3",
+        "pad4",
+        "pad5",
+        "pad6",
+        "pad7"
+      ],
+      "field_count": 9
+    },
+    "brody": {
+      "filename": "drd_table_brody.json",
+      "size_bytes": 12184,
+      "type": "table",
+      "name": "brody",
+      "database": "drd",
+      "record_count": 48,
+      "fields": [
+        "id",
+        "nazev",
+        "rod",
+        "pad2",
+        "pad3",
+        "pad4",
+        "pad5",
+        "pad6",
+        "pad7"
+      ],
+      "field_count": 9
+    },
+    "domy": {
+      "filename": "drd_table_domy.json",
+      "size_bytes": 25613,
+      "type": "table",
+      "name": "domy",
+      "database": "drd",
+      "record_count": 81,
+      "fields": [
+        "id",
+        "nazev",
+        "rod",
+        "pad2",
+        "pad3",
+        "pad4",
+        "pad5",
+        "pad6",
+        "pad7",
+        "dum",
+        "hospoda",
+        "obchod",
+        "nevestinec"
+      ],
+      "field_count": 13
+    },
+    "drd_sklonovani": {
+      "filename": "drd_table_drd_sklonovani.json",
+      "size_bytes": 43329,
+      "type": "table",
+      "name": "drd_sklonovani",
+      "database": "drd",
+      "record_count": 136,
+      "fields": [
+        "id",
+        "zadani_nazev",
+        "zadani_rod",
+        "priorita",
+        "vysl_rod",
+        "vysl_pad2",
+        "vysl_pad3",
+        "vysl_pad4",
+        "vysl_pad5",
+        "vysl_pad6",
+        "vysl_pad7"
+      ],
+      "field_count": 11
+    },
+    "drd_tabulky": {
+      "filename": "drd_table_drd_tabulky.json",
+      "size_bytes": 3097,
+      "type": "table",
+      "name": "drd_tabulky",
+      "database": "drd",
+      "record_count": 30,
+      "fields": [
+        "id",
+        "nazev",
+        "razeni",
+        "slova"
+      ],
+      "field_count": 4
+    },
+    "hory": {
+      "filename": "drd_table_hory.json",
+      "size_bytes": 43223,
+      "type": "table",
+      "name": "hory",
+      "database": "drd",
+      "record_count": 181,
+      "fields": [
+        "id",
+        "nazev",
+        "rod",
+        "pad2",
+        "pad3",
+        "pad4",
+        "pad5",
+        "pad6",
+        "pad7"
+      ],
+      "field_count": 9
+    },
+    "hrady": {
+      "filename": "drd_table_hrady.json",
+      "size_bytes": 38420,
+      "type": "table",
+      "name": "hrady",
+      "database": "drd",
+      "record_count": 182,
+      "fields": [
+        "id",
+        "nazev",
+        "rod",
+        "pad2",
+        "pad3",
+        "pad4",
+        "pad5",
+        "pad6",
+        "pad7"
+      ],
+      "field_count": 9
+    },
+    "jeskyne": {
+      "filename": "drd_table_jeskyne.json",
+      "size_bytes": 17913,
+      "type": "table",
+      "name": "jeskyne",
+      "database": "drd",
+      "record_count": 66,
+      "fields": [
+        "id",
+        "nazev",
+        "rod",
+        "pad2",
+        "pad3",
+        "pad4",
+        "pad5",
+        "pad6",
+        "pad7"
+      ],
+      "field_count": 9
+    },
+    "jezera": {
+      "filename": "drd_table_jezera.json",
+      "size_bytes": 42756,
+      "type": "table",
+      "name": "jezera",
+      "database": "drd",
+      "record_count": 162,
+      "fields": [
+        "id",
+        "nazev",
+        "rod",
+        "pad2",
+        "pad3",
+        "pad4",
+        "pad5",
+        "pad6",
+        "pad7"
+      ],
+      "field_count": 9
+    },
+    "jmena": {
+      "filename": "drd_table_jmena_upraveno.json",
+      "size_bytes": 14261510,
+      "type": "table",
+      "name": "jmena",
+      "database": "drd",
+      "record_count": 20820,
+      "fields": [
+        "id",
+        "jmeno",
+        "pohlavi",
+        "ekvivalence",
+        "pad2",
+        "pad3",
+        "pad4",
+        "pad5",
+        "pad6",
+        "pad7",
+        "clovek",
+        "elf",
+        "trpaslik",
+        "barbar",
+        "valecnik",
+        "hranicar",
+        "alchymista",
+        "kouzelnik",
+        "zlodej",
+        "pulcik",
+        "klerik",
+        "gnom",
+        "obr"
+      ],
+      "field_count": 23
+    },
+    "jmena_ekvivalence": {
+      "filename": "drd_table_jmena_ekvivalence.json",
+      "size_bytes": 265474,
+      "type": "table",
+      "name": "jmena_ekvivalence",
+      "database": "drd",
+      "record_count": 4077,
+      "fields": [
+        "id",
+        "jmeno",
+        "pohlavi"
+      ],
+      "field_count": 3
+    },
+    "ledovce": {
+      "filename": "drd_table_ledovce.json",
+      "size_bytes": 9597,
+      "type": "table",
+      "name": "ledovce",
+      "database": "drd",
+      "record_count": 36,
+      "fields": [
+        "id",
+        "nazev",
+        "rod",
+        "pad2",
+        "pad3",
+        "pad4",
+        "pad5",
+        "pad6",
+        "pad7"
+      ],
+      "field_count": 9
+    },
+    "lesy": {
+      "filename": "drd_table_lesy.json",
+      "size_bytes": 42252,
+      "type": "table",
+      "name": "lesy",
+      "database": "drd",
+      "record_count": 171,
+      "fields": [
+        "id",
+        "nazev",
+        "rod",
+        "pad2",
+        "pad3",
+        "pad4",
+        "pad5",
+        "pad6",
+        "pad7"
+      ],
+      "field_count": 9
+    },
+    "lode": {
+      "filename": "drd_table_lode.json",
+      "size_bytes": 26516,
+      "type": "table",
+      "name": "lode",
+      "database": "drd",
+      "record_count": 124,
+      "fields": [
+        "id",
+        "nazev",
+        "rod",
+        "pad2",
+        "pad3",
+        "pad4",
+        "pad5",
+        "pad6",
+        "pad7"
+      ],
+      "field_count": 9
+    },
+    "mesta": {
+      "filename": "drd_table_mesta.json",
+      "size_bytes": 1889765,
+      "type": "table",
+      "name": "mesta",
+      "database": "drd",
+      "record_count": 8718,
+      "fields": [
+        "id",
+        "nazev",
+        "rod",
+        "pad2",
+        "pad3",
+        "pad4",
+        "pad5",
+        "pad6",
+        "pad7"
+      ],
+      "field_count": 9
+    },
+    "more": {
+      "filename": "drd_table_more.json",
+      "size_bytes": 18860,
+      "type": "table",
+      "name": "more",
+      "database": "drd",
+      "record_count": 74,
+      "fields": [
+        "id",
+        "nazev",
+        "rod",
+        "pad2",
+        "pad3",
+        "pad4",
+        "pad5",
+        "pad6",
+        "pad7"
+      ],
+      "field_count": 9
+    },
+    "mysy": {
+      "filename": "drd_table_mysy.json",
+      "size_bytes": 12198,
+      "type": "table",
+      "name": "mysy",
+      "database": "drd",
+      "record_count": 48,
+      "fields": [
+        "id",
+        "nazev",
+        "rod",
+        "pad2",
+        "pad3",
+        "pad4",
+        "pad5",
+        "pad6",
+        "pad7"
+      ],
+      "field_count": 9
+    },
+    "ostrovy": {
+      "filename": "drd_table_ostrovy.json",
+      "size_bytes": 44387,
+      "type": "table",
+      "name": "ostrovy",
+      "database": "drd",
+      "record_count": 160,
+      "fields": [
+        "id",
+        "nazev",
+        "rod",
+        "pad2",
+        "pad3",
+        "pad4",
+        "pad5",
+        "pad6",
+        "pad7"
+      ],
+      "field_count": 9
+    },
+    "plane": {
+      "filename": "drd_table_plane.json",
+      "size_bytes": 14004,
+      "type": "table",
+      "name": "plane",
+      "database": "drd",
+      "record_count": 54,
+      "fields": [
+        "id",
+        "nazev",
+        "rod",
+        "pad2",
+        "pad3",
+        "pad4",
+        "pad5",
+        "pad6",
+        "pad7"
+      ],
+      "field_count": 9
+    },
+    "pohori": {
+      "filename": "drd_table_pohori.json",
+      "size_bytes": 28588,
+      "type": "table",
+      "name": "pohori",
+      "database": "drd",
+      "record_count": 111,
+      "fields": [
+        "id",
+        "nazev",
+        "rod",
+        "pad2",
+        "pad3",
+        "pad4",
+        "pad5",
+        "pad6",
+        "pad7"
+      ],
+      "field_count": 9
+    },
+    "pouste": {
+      "filename": "drd_table_pouste.json",
+      "size_bytes": 11632,
+      "type": "table",
+      "name": "pouste",
+      "database": "drd",
+      "record_count": 43,
+      "fields": [
+        "id",
+        "nazev",
+        "rod",
+        "pad2",
+        "pad3",
+        "pad4",
+        "pad5",
+        "pad6",
+        "pad7"
+      ],
+      "field_count": 9
+    },
+    "pridomky": {
+      "filename": "drd_table_pridomky.json",
+      "size_bytes": 277467,
+      "type": "table",
+      "name": "pridomky",
+      "database": "drd",
+      "record_count": 1220,
+      "fields": [
+        "id",
+        "pridomek",
+        "pohlavi",
+        "pad2",
+        "pad3",
+        "pad4",
+        "pad5",
+        "pad6",
+        "pad7"
+      ],
+      "field_count": 9
+    },
+    "prijmeni": {
+      "filename": "drd_table_prijmeni.json",
+      "size_bytes": 768586,
+      "type": "table",
+      "name": "prijmeni",
+      "database": "drd",
+      "record_count": 1455,
+      "fields": [
+        "id",
+        "prijmeni",
+        "pad2",
+        "pad3",
+        "pad4",
+        "pad5",
+        "pad6",
+        "pad7",
+        "zena",
+        "zena2",
+        "zena3",
+        "zena4",
+        "zena5",
+        "zena6",
+        "zena7",
+        "clovek",
+        "elf",
+        "trpaslik",
+        "hobit",
+        "kuduk",
+        "barbar",
+        "kroll"
+      ],
+      "field_count": 22
+    },
+    "prusmyky": {
+      "filename": "drd_table_prusmyky.json",
+      "size_bytes": 13083,
+      "type": "table",
+      "name": "prusmyky",
+      "database": "drd",
+      "record_count": 46,
+      "fields": [
+        "id",
+        "nazev",
+        "rod",
+        "pad2",
+        "pad3",
+        "pad4",
+        "pad5",
+        "pad6",
+        "pad7"
+      ],
+      "field_count": 9
+    },
+    "reky": {
+      "filename": "drd_table_reky.json",
+      "size_bytes": 51972,
+      "type": "table",
+      "name": "reky",
+      "database": "drd",
+      "record_count": 251,
+      "fields": [
+        "id",
+        "nazev",
+        "rod",
+        "pad2",
+        "pad3",
+        "pad4",
+        "pad5",
+        "pad6",
+        "pad7"
+      ],
+      "field_count": 9
+    },
+    "rokle": {
+      "filename": "drd_table_rokle.json",
+      "size_bytes": 11162,
+      "type": "table",
+      "name": "rokle",
+      "database": "drd",
+      "record_count": 45,
+      "fields": [
+        "id",
+        "nazev",
+        "rod",
+        "pad2",
+        "pad3",
+        "pad4",
+        "pad5",
+        "pad6",
+        "pad7"
+      ],
+      "field_count": 9
+    },
+    "soutesky": {
+      "filename": "drd_table_soutesky.json",
+      "size_bytes": 11822,
+      "type": "table",
+      "name": "soutesky",
+      "database": "drd",
+      "record_count": 42,
+      "fields": [
+        "id",
+        "nazev",
+        "rod",
+        "pad2",
+        "pad3",
+        "pad4",
+        "pad5",
+        "pad6",
+        "pad7"
+      ],
+      "field_count": 9
+    },
+    "stepi": {
+      "filename": "drd_table_stepi.json",
+      "size_bytes": 13031,
+      "type": "table",
+      "name": "stepi",
+      "database": "drd",
+      "record_count": 51,
+      "fields": [
+        "id",
+        "nazev",
+        "rod",
+        "pad2",
+        "pad3",
+        "pad4",
+        "pad5",
+        "pad6",
+        "pad7"
+      ],
+      "field_count": 9
+    },
+    "udelat_jmena": {
+      "filename": "drd_table_udelat_jmena.json",
+      "size_bytes": 66548,
+      "type": "table",
+      "name": "udelat_jmena",
+      "database": "drd",
+      "record_count": 972,
+      "fields": [
+        "id",
+        "jmeno",
+        "ekvivalent"
+      ],
+      "field_count": 3
+    },
+    "udoli": {
+      "filename": "drd_table_udoli.json",
+      "size_bytes": 19499,
+      "type": "table",
+      "name": "udoli",
+      "database": "drd",
+      "record_count": 71,
+      "fields": [
+        "id",
+        "nazev",
+        "rod",
+        "pad2",
+        "pad3",
+        "pad4",
+        "pad5",
+        "pad6",
+        "pad7"
+      ],
+      "field_count": 9
+    },
+    "ulice": {
+      "filename": "drd_table_ulice_original.json",
+      "size_bytes": 175137,
+      "type": "table",
+      "name": "ulice",
+      "database": "drd",
+      "record_count": 772,
+      "fields": [
+        "id",
+        "nazev",
+        "rod",
+        "pad2",
+        "pad3",
+        "pad4",
+        "pad5",
+        "pad6",
+        "pad7"
+      ],
+      "field_count": 9
+    },
+    "utesy": {
+      "filename": "drd_table_utesy.json",
+      "size_bytes": 12585,
+      "type": "table",
+      "name": "utesy",
+      "database": "drd",
+      "record_count": 47,
+      "fields": [
+        "id",
+        "nazev",
+        "rod",
+        "pad2",
+        "pad3",
+        "pad4",
+        "pad5",
+        "pad6",
+        "pad7"
+      ],
+      "field_count": 9
+    },
+    "zatoky": {
+      "filename": "drd_table_zatoky.json",
+      "size_bytes": 23231,
+      "type": "table",
+      "name": "zatoky",
+      "database": "drd",
+      "record_count": 88,
+      "fields": [
+        "id",
+        "nazev",
+        "rod",
+        "pad2",
+        "pad3",
+        "pad4",
+        "pad5",
+        "pad6",
+        "pad7"
+      ],
+      "field_count": 9
+    },
+    "zeme": {
+      "filename": "drd_table_zeme.json",
+      "size_bytes": 48394,
+      "type": "table",
+      "name": "zeme",
+      "database": "drd",
+      "record_count": 231,
+      "fields": [
+        "id",
+        "nazev",
+        "rod",
+        "pad2",
+        "pad3",
+        "pad4",
+        "pad5",
+        "pad6",
+        "pad7"
+      ],
+      "field_count": 9
+    }
+  },
+  "summary": {
+    "table_types": {
+      "array": 1,
+      "table": 36
+    },
+    "largest_table": "jmena",
+    "average_records_per_table": 1673.76
+  },
+  "total_size_bytes": 28235130,
+  "total_size_mb": 26.93
+}

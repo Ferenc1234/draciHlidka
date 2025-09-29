@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistiky DrD Databáze</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            backdrop-filter: blur(10px);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #3498db;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .table-list {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .table-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .table-item:last-child {
+            border-bottom: none;
+        }
+        
+        .table-name {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .table-stats {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #7f8c8d;
+        }
+        
+        .error {
+            background: #e74c3c;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        
+        .refresh-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin: 10px;
+        }
+        
+        .refresh-btn:hover {
+            background: #2980b9;
+        }
+        
+        .timestamp {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 Statistiky DrD Databáze</h1>
+        
+        <div id="loading" class="loading">
+            Načítám statistiky...
+        </div>
+        
+        <div id="error" class="error" style="display: none;"></div>
+        
+        <div id="content" style="display: none;">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="total-files">-</div>
+                    <div class="stat-label">Celkem souborů</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number" id="total-records">-</div>
+                    <div class="stat-label">Celkem záznamů</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number" id="total-size">-</div>
+                    <div class="stat-label">Velikost (MB)</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number" id="avg-records">-</div>
+                    <div class="stat-label">Průměr záznamů</div>
+                </div>
+            </div>
+            
+            <div class="table-list">
+                <h2>🏆 Top 15 největších tabulek</h2>
+                <div id="top-tables"></div>
+            </div>
+            
+            <div class="table-list">
+                <h2>📋 Všechny tabulky</h2>
+                <button class="refresh-btn" onclick="loadStats()">🔄 Obnovit statistiky</button>
+                <div id="all-tables"></div>
+            </div>
+            
+            <div class="timestamp" id="timestamp"></div>
+        </div>
+    </div>
+
+    <script>
+        let currentStats = null;
+        
+        async function loadStats() {
+            const loading = document.getElementById('loading');
+            const error = document.getElementById('error');
+            const content = document.getElementById('content');
+            
+            loading.style.display = 'block';
+            error.style.display = 'none';
+            content.style.display = 'none';
+            
+            try {
+                const response = await fetch('database_stats.json');
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                currentStats = await response.json();
+                displayStats(currentStats);
+                
+                loading.style.display = 'none';
+                content.style.display = 'block';
+                
+            } catch (err) {
+                console.error('Chyba při načítání statistik:', err);
+                error.textContent = `Chyba při načítání statistik: ${err.message}`;
+                error.style.display = 'block';
+                loading.style.display = 'none';
+            }
+        }
+        
+        function displayStats(stats) {
+            // Základní statistiky
+            document.getElementById('total-files').textContent = stats.total_files.toLocaleString();
+            document.getElementById('total-records').textContent = stats.total_records.toLocaleString();
+            document.getElementById('total-size').textContent = stats.total_size_mb || '0';
+            document.getElementById('avg-records').textContent = stats.summary.average_records_per_table || '0';
+            
+            // Časové razítko
+            const timestamp = new Date(stats.generated_at);
+            document.getElementById('timestamp').textContent = 
+                `Poslední aktualizace: ${timestamp.toLocaleDateString('cs-CZ')} ${timestamp.toLocaleTimeString('cs-CZ')}`;
+            
+            // Top tabulky
+            displayTopTables(stats);
+            
+            // Všechny tabulky
+            displayAllTables(stats);
+        }
+        
+        function displayTopTables(stats) {
+            const container = document.getElementById('top-tables');
+            
+            // Seřadíme tabulky podle počtu záznamů
+            const sortedTables = Object.entries(stats.tables)
+                .filter(([name, table]) => table.record_count > 0)
+                .sort(([,a], [,b]) => (b.record_count || 0) - (a.record_count || 0))
+                .slice(0, 15);
+            
+            container.innerHTML = sortedTables.map(([name, table], index) => `
+                <div class="table-item">
+                    <div>
+                        <span style="color: #3498db; font-weight: bold;">#${index + 1}</span>
+                        <span class="table-name">${name}</span>
+                    </div>
+                    <div class="table-stats">
+                        ${(table.record_count || 0).toLocaleString()} záznamů 
+                        (${((table.size_bytes || 0) / 1024).toFixed(1)} KB)
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function displayAllTables(stats) {
+            const container = document.getElementById('all-tables');
+            
+            // Seřadíme tabulky alfabeticky
+            const sortedTables = Object.entries(stats.tables)
+                .filter(([name]) => name !== 'unknown')
+                .sort(([a], [b]) => a.localeCompare(b));
+            
+            container.innerHTML = sortedTables.map(([name, table]) => `
+                <div class="table-item">
+                    <div>
+                        <div class="table-name">${name}</div>
+                        <div style="font-size: 0.8em; color: #95a5a6;">
+                            Typ: ${table.type || 'neznámý'} | 
+                            Sloupců: ${table.field_count || 0}
+                        </div>
+                    </div>
+                    <div class="table-stats">
+                        ${(table.record_count || 0).toLocaleString()} záznamů<br>
+                        ${((table.size_bytes || 0) / 1024).toFixed(1)} KB
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Načti statistiky při načtení stránky
+        document.addEventListener('DOMContentLoaded', loadStats);
+        
+        // Automatické obnovování každých 5 minut
+        setInterval(loadStats, 5 * 60 * 1000);
+    </script>
+</body>
+</html>
