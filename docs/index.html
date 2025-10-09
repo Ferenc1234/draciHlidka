@@ -108,18 +108,55 @@
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             border-radius: 10px;
             color: white;
-            text-align: center;
+            text-align: left;
             min-height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
         }
 
         .result-content {
-            font-size: 1.4em;
+            font-size: 1.2em;
             font-weight: 600;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .result-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            border-left: 4px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .result-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .filters-section {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .filter-row .form-group {
+            flex: 1;
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 600px) {
+            .filter-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .filter-row .form-group {
+                margin-bottom: 15px;
+            }
         }
 
         .loading {
@@ -194,7 +231,7 @@
         <div class="generator-section">
             <div class="form-group">
                 <label for="tableSelect">Vyberte kategorii:</label>
-                <select id="tableSelect">
+                <select id="tableSelect" onchange="updateFilters()">
                     <option value="">-- Vyberte kategorii --</option>
                     <option value="mesta">🏰 Města</option>
                     <option value="jmena">👤 Jména</option>
@@ -226,8 +263,64 @@
                     <option value="zatoky">🏖️ Zátoky</option>
                 </select>
             </div>
+
+            <!-- Filters section -->
+            <div id="filtersSection" class="filters-section" style="display: none;">
+                <!-- Gender filter for most tables -->
+                <div class="form-group" id="genderFilter" style="display: none;">
+                    <label for="genderSelect">Rod:</label>
+                    <select id="genderSelect">
+                        <option value="">-- Jakýkoliv --</option>
+                        <option value="M">Mužský</option>
+                        <option value="F">Ženský</option>
+                        <option value="N">Střední</option>
+                    </select>
+                </div>
+
+                <!-- Filters specific to names table -->
+                <div id="nameFilters" style="display: none;">
+                    <div class="filter-row">
+                        <div class="form-group">
+                            <label for="raceSelect">Rasa:</label>
+                            <select id="raceSelect">
+                                <option value="">-- Jakákoliv --</option>
+                                <option value="clovek">Člověk</option>
+                                <option value="elf">Elf</option>
+                                <option value="trpaslik">Trpaslík</option>
+                                <option value="hobit">Hobit</option>
+                                <option value="kuduk">Kuduk</option>
+                                <option value="kroll">Kroll</option>
+                                <option value="barbar">Barbar</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="classSelect">Povolání:</label>
+                            <select id="classSelect">
+                                <option value="">-- Jakékoliv --</option>
+                                <option value="valecnik">Válečník</option>
+                                <option value="hranicar">Hraničář</option>
+                                <option value="alchymista">Alchymista</option>
+                                <option value="kouzelnik">Kouzelník</option>
+                                <option value="zlodej">Zloděj</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="countSelect">Počet položek:</label>
+                <select id="countSelect">
+                    <option value="1">1 položka</option>
+                    <option value="3">3 položky</option>
+                    <option value="5">5 položek</option>
+                    <option value="10">10 položek</option>
+                    <option value="20">20 položek</option>
+                </select>
+            </div>
             
-            <button class="btn" onclick="generateRandom()">🎲 Generovat náhodnou položku</button>
+            <button class="btn" onclick="generateRandom()">🎲 Generovat náhodné položky</button>
             
             <div class="loading" id="loading">
                 Načítám data...
@@ -246,8 +339,8 @@
                 <div class="stat-label">Celkem položek</div>
             </div>
             <div class="stat">
-                <div class="stat-number" id="generatedCount">0</div>
-                <div class="stat-label">Vygenerováno</div>
+                <div class="stat-number" id="filteredEntries">0</div>
+                <div class="stat-label">Po filtrování</div>
             </div>
         </div>
 
@@ -258,8 +351,99 @@
 
     <script>
         let currentData = null;
-        let generatedCount = 0;
         const baseUrl = 'DrD-Jmena/drd_table_';
+
+        // Table configurations for filters
+        const tableConfigs = {
+            jmena: {
+                hasGender: true,
+                genderField: 'pohlavi',
+                hasRace: true,
+                hasClass: true,
+                displayField: 'jmeno'
+            },
+            mesta: {
+                hasGender: true,
+                genderField: 'rod',
+                displayField: 'nazev'
+            },
+            ulice: {
+                hasGender: true,
+                genderField: 'rod',
+                displayField: 'nazev'
+            },
+            hory: {
+                hasGender: true,
+                genderField: 'rod',
+                displayField: 'nazev'
+            },
+            reky: {
+                hasGender: true,
+                genderField: 'rod',
+                displayField: 'nazev'
+            },
+            // Add more tables with gender field
+            jezera: { hasGender: true, genderField: 'rod', displayField: 'nazev' },
+            lesy: { hasGender: true, genderField: 'rod', displayField: 'nazev' },
+            hrady: { hasGender: true, genderField: 'rod', displayField: 'nazev' },
+            ostrovy: { hasGender: true, genderField: 'rod', displayField: 'nazev' },
+            pouste: { hasGender: true, genderField: 'rod', displayField: 'nazev' },
+            udoli: { hasGender: true, genderField: 'rod', displayField: 'nazev' },
+            jeskyne: { hasGender: true, genderField: 'rod', displayField: 'nazev' },
+            lode: { hasGender: true, genderField: 'rod', displayField: 'nazev' },
+            baziny: { hasGender: true, genderField: 'rod', displayField: 'nazev' },
+            brody: { hasGender: true, genderField: 'rod', displayField: 'nazev' },
+            domy: { hasGender: true, genderField: 'rod', displayField: 'nazev' },
+            ledovce: { hasGender: true, genderField: 'rod', displayField: 'nazev' },
+            more: { hasGender: true, genderField: 'rod', displayField: 'nazev' },
+            mysy: { hasGender: true, genderField: 'rod', displayField: 'nazev' },
+            pohori: { hasGender: true, genderField: 'rod', displayField: 'nazev' },
+            prusmyky: { hasGender: true, genderField: 'rod', displayField: 'nazev' },
+            rokle: { hasGender: true, genderField: 'rod', displayField: 'nazev' },
+            soutesky: { hasGender: true, genderField: 'rod', displayField: 'nazev' },
+            stepi: { hasGender: true, genderField: 'rod', displayField: 'nazev' },
+            utesy: { hasGender: true, genderField: 'rod', displayField: 'nazev' },
+            zatoky: { hasGender: true, genderField: 'rod', displayField: 'nazev' },
+            zeme: { hasGender: true, genderField: 'rod', displayField: 'nazev' },
+            prijmeni: { hasGender: true, genderField: 'rod', displayField: 'nazev' }
+        };
+
+        function updateFilters() {
+            const selectedTable = document.getElementById('tableSelect').value;
+            const filtersSection = document.getElementById('filtersSection');
+            const genderFilter = document.getElementById('genderFilter');
+            const nameFilters = document.getElementById('nameFilters');
+            
+            // Hide all filters first
+            filtersSection.style.display = 'none';
+            genderFilter.style.display = 'none';
+            nameFilters.style.display = 'none';
+            
+            if (!selectedTable) return;
+            
+            const config = tableConfigs[selectedTable];
+            if (!config) return;
+            
+            filtersSection.style.display = 'block';
+            
+            // Show gender filter if table supports it
+            if (config.hasGender) {
+                genderFilter.style.display = 'block';
+            }
+            
+            // Show name-specific filters for jmena table
+            if (selectedTable === 'jmena') {
+                nameFilters.style.display = 'block';
+            }
+            
+            // Reset filter values
+            document.getElementById('genderSelect').value = '';
+            document.getElementById('raceSelect').value = '';
+            document.getElementById('classSelect').value = '';
+            
+            // Clear current data to force reload
+            currentData = null;
+        }
 
         async function loadTableData(tableName) {
             try {
@@ -273,7 +457,7 @@
                 const data = await response.json();
                 document.getElementById('loading').style.display = 'none';
                 
-                return data.data || data; // Handle both formats
+                return data.data || data;
             } catch (error) {
                 document.getElementById('loading').style.display = 'none';
                 console.error('Error loading data:', error);
@@ -281,12 +465,64 @@
             }
         }
 
+        function applyFilters(data, tableName) {
+            const config = tableConfigs[tableName];
+            if (!config) return data;
+            
+            let filtered = [...data];
+            
+            // Apply gender filter
+            if (config.hasGender) {
+                const genderValue = document.getElementById('genderSelect').value;
+                if (genderValue) {
+                    filtered = filtered.filter(item => item[config.genderField] === genderValue);
+                }
+            }
+            
+            // Apply name-specific filters
+            if (tableName === 'jmena') {
+                const raceValue = document.getElementById('raceSelect').value;
+                const classValue = document.getElementById('classSelect').value;
+                
+                if (raceValue) {
+                    filtered = filtered.filter(item => item[raceValue] === '1');
+                }
+                
+                if (classValue) {
+                    filtered = filtered.filter(item => item[classValue] === '1');
+                }
+            }
+            
+            return filtered;
+        }
+
+        function formatResult(item, tableName) {
+            const config = tableConfigs[tableName] || {};
+            let resultText = '';
+            
+            if (tableName === 'jmena') {
+                resultText = item.jmeno || 'Neznámé jméno';
+                if (item.pohlavi) {
+                    const gender = item.pohlavi === 'M' ? '♂️' : item.pohlavi === 'F' ? '♀️' : '';
+                    resultText += ` ${gender}`;
+                }
+            } else {
+                // For other items, try common field names
+                resultText = item.nazev || item.name || item.jmeno || 
+                            item.pad1 || Object.values(item)[0] || 'Neznámá položka';
+            }
+            
+            return resultText;
+        }
+
         async function generateRandom() {
             const select = document.getElementById('tableSelect');
             const selectedTable = select.value;
+            const countSelect = document.getElementById('countSelect');
+            const count = parseInt(countSelect.value) || 1;
             
             if (!selectedTable) {
-                showResult('Prosím vyberte kategorii!', 'error');
+                showResult(['Prosím vyberte kategorii!'], 'error');
                 return;
             }
 
@@ -297,58 +533,64 @@
                         tableName: selectedTable,
                         data: await loadTableData(selectedTable)
                     };
-                    
-                    // Update stats
-                    document.getElementById('totalEntries').textContent = 
-                        currentData.data.length.toLocaleString('cs-CZ');
-                    document.getElementById('stats').style.display = 'flex';
                 }
 
-                // Generate random item
-                if (currentData.data.length === 0) {
-                    showResult('Tabulka je prázdná!', 'error');
+                // Apply filters
+                const filteredData = applyFilters(currentData.data, selectedTable);
+                
+                // Update stats
+                document.getElementById('totalEntries').textContent = 
+                    currentData.data.length.toLocaleString('cs-CZ');
+                document.getElementById('filteredEntries').textContent = 
+                    filteredData.length.toLocaleString('cs-CZ');
+                document.getElementById('stats').style.display = 'flex';
+
+                // Generate random items
+                if (filteredData.length === 0) {
+                    showResult(['Žádné položky nevyhovují zadaným filtrům!'], 'error');
                     return;
                 }
 
-                const randomIndex = Math.floor(Math.random() * currentData.data.length);
-                const randomItem = currentData.data[randomIndex];
+                const results = [];
+                const usedIndices = new Set();
                 
-                // Extract the main name/text from the item
-                let resultText = '';
-                
-                if (selectedTable === 'jmena') {
-                    // For names, show the name with some additional info
-                    resultText = randomItem.jmeno || randomItem.name || 'Neznámé jméno';
-                    if (randomItem.rod) {
-                        const rod = randomItem.rod === 'M' ? '♂️' : randomItem.rod === 'Z' ? '♀️' : '';
-                        resultText += ` ${rod}`;
-                    }
-                } else if (selectedTable === 'ulice') {
-                    // For streets, show the nominative case
-                    resultText = randomItem.pad1 || randomItem.nazev || randomItem.name || 'Neznámá ulice';
-                } else {
-                    // For other items, try common field names
-                    resultText = randomItem.nazev || randomItem.name || randomItem.jmeno || 
-                                randomItem.pad1 || Object.values(randomItem)[0] || 'Neznámá položka';
+                for (let i = 0; i < count && i < filteredData.length; i++) {
+                    let randomIndex;
+                    do {
+                        randomIndex = Math.floor(Math.random() * filteredData.length);
+                    } while (usedIndices.has(randomIndex) && usedIndices.size < filteredData.length);
+                    
+                    usedIndices.add(randomIndex);
+                    const randomItem = filteredData[randomIndex];
+                    const resultText = formatResult(randomItem, selectedTable);
+                    results.push(resultText);
                 }
-
-                generatedCount++;
-                document.getElementById('generatedCount').textContent = generatedCount;
                 
-                showResult(resultText, 'success');
+                showResult(results, 'success');
 
             } catch (error) {
-                showResult(`Chyba při načítání dat: ${error.message}`, 'error');
+                showResult([`Chyba při načítání dat: ${error.message}`], 'error');
             }
         }
 
-        function showResult(text, type = 'success') {
+        function showResult(results, type = 'success') {
             const resultDiv = document.getElementById('result');
             const resultContent = document.getElementById('resultContent');
             
-            resultContent.textContent = text;
+            if (Array.isArray(results)) {
+                if (results.length === 1) {
+                    resultContent.innerHTML = results[0];
+                } else {
+                    resultContent.innerHTML = results.map((result, index) => 
+                        `<div class="result-item">${index + 1}. ${result}</div>`
+                    ).join('');
+                }
+            } else {
+                resultContent.innerHTML = results;
+            }
+            
             resultDiv.className = `result ${type}`;
-            resultDiv.style.display = 'flex';
+            resultDiv.style.display = 'block';
         }
 
         // Initialize page

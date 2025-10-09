@@ -2,6 +2,29 @@
 
 [![Update Database Statistics](https://github.com/Ferenc1234/draciHlidka/actions/workflows/update-database-stats.yml/badge.svg)](https://github.com/Ferenc1234/draciHlidka/actions/workflows/update-database-stats.yml)
 
+## DrD Random Generator
+
+This project contains a web-based random generator for Dungeons & Dragons (DrD) items from the Dračí hlídka database.
+
+### Features
+
+- **Multiple Categories**: Generate random items from 25+ different categories including names, cities, mountains, rivers, etc.
+- **Advanced Filtering**: Each database table has its own filter options:
+  - **Names**: Filter by gender, race (Human, Elf, Dwarf, Hobbit, Kuduk, Barbarian, Kroll), and class (Warrior, Ranger, Alchemist, Wizard, Thief)
+  - **Most other tables**: Filter by grammatical gender (Masculine, Feminine, Neuter)
+- **Bulk Generation**: Generate 1, 3, 5, 10, or 20 items at once
+- **Smart Statistics**: Shows total entries and filtered entries count
+- **Responsive Design**: Works on both desktop and mobile devices
+
+### Usage
+
+1. Select a category from the dropdown
+2. Choose any filters (optional - if not selected, chooses randomly)
+3. Select how many items to generate
+4. Click "Generate" or press Enter/Space
+
+### Available Tables
+
 ## Database Statistics
 
 *Last updated: 2025-09-27 14:27:52*
