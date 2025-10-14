@@ -1,6 +1,127 @@
 let currentData = null;
 let currentTableConfig = null;
-const baseUrl = 'DrD-Jmena/drd_table_';
+
+// Try multiple URL patterns to find the correct path
+async function findWorkingBaseUrl(tableName = 'mesta') {
+    const possibleUrls = [
+        'DrD-Jmena/drd_table_',                           // Local/relative
+        './DrD-Jmena/drd_table_',                         // Explicit relative
+        '/draciHlidka/docs/DrD-Jmena/drd_table_',        // GitHub Pages with repo name
+        '/docs/DrD-Jmena/drd_table_',                     // GitHub Pages alternative
+        '../DrD-Jmena/drd_table_',                        // Parent directory
+    ];
+    
+    console.log('Testing URL patterns...');
+    
+    for (const url of possibleUrls) {
+        try {
+            const testUrl = `${url}${tableName}.json`;
+            console.log('Testing:', testUrl);
+            const response = await fetch(testUrl);
+            if (response.ok) {
+                console.log('✓ Working URL pattern found:', url);
+                return url;
+            }
+        } catch (error) {
+            console.log('✗ Failed:', url);
+        }
+    }
+    
+    console.error('No working URL pattern found!');
+    return 'DrD-Jmena/drd_table_'; // fallback
+}
+
+let baseUrl = 'DrD-Jmena/drd_table_'; // default
+let urlTestingDone = false;
+
+// Fallback table configurations for when dynamic loading fails
+const fallbackTableConfigs = {
+    jmena: {
+        displayField: 'jmeno',
+        filters: {
+            gender: {
+                field: 'pohlavi',
+                label: 'Rod',
+                options: [
+                    {value: 'M', label: 'Mužský'},
+                    {value: 'F', label: 'Ženský'}
+                ]
+            },
+            race: {
+                field: 'race',
+                label: 'Rasa',
+                options: [
+                    {value: 'clovek', label: 'Člověk'},
+                    {value: 'elf', label: 'Elf'},
+                    {value: 'trpaslik', label: 'Trpaslík'},
+                    {value: 'hobit', label: 'Hobit'},
+                    {value: 'kuduk', label: 'Kuduk'},
+                    {value: 'kroll', label: 'Kroll'},
+                    {value: 'barbar', label: 'Barbar'}
+                ]
+            },
+            class: {
+                field: 'class',
+                label: 'Povolání',
+                options: [
+                    {value: 'valecnik', label: 'Válečník'},
+                    {value: 'hranicar', label: 'Hraničář'},
+                    {value: 'alchymista', label: 'Alchymista'},
+                    {value: 'kouzelnik', label: 'Kouzelník'},
+                    {value: 'zlodej', label: 'Zloděj'}
+                ]
+            }
+        }
+    },
+    // Default config for most tables
+    default: {
+        displayField: 'nazev',
+        filters: {
+            gender: {
+                field: 'rod',
+                label: 'Rod',
+                options: [
+                    {value: 'M', label: 'Mužský'},
+                    {value: 'F', label: 'Ženský'},
+                    {value: 'N', label: 'Střední'}
+                ]
+            }
+        }
+    }
+};
+window.debugDrD = async function() {
+    console.log('=== DrD Debug Information ===');
+    console.log('Current URL:', window.location.href);
+    console.log('Hostname:', window.location.hostname);
+    console.log('Pathname:', window.location.pathname);
+    console.log('Current baseUrl:', baseUrl);
+    
+    console.log('\n=== Testing all URL patterns ===');
+    const testTable = 'mesta';
+    const patterns = [
+        'DrD-Jmena/drd_table_',
+        './DrD-Jmena/drd_table_',
+        '/draciHlidka/docs/DrD-Jmena/drd_table_',
+        '/docs/DrD-Jmena/drd_table_',
+        '../DrD-Jmena/drd_table_',
+    ];
+    
+    for (const pattern of patterns) {
+        const testUrl = `${pattern}${testTable}.json`;
+        try {
+            const response = await fetch(testUrl);
+            console.log(`${response.ok ? '✓' : '✗'} ${testUrl} (${response.status})`);
+            if (response.ok) {
+                const data = await response.json();
+                console.log(`  → Contains ${data.data?.length || 0} entries`);
+            }
+        } catch (error) {
+            console.log(`✗ ${testUrl} (Error: ${error.message})`);
+        }
+    }
+    
+    console.log('\n=== End Debug ===');
+};
 
 // Loading control functions
 function showLoading(text = 'Načítám data...', subtext = 'Prosím čekejte') {
@@ -83,12 +204,24 @@ async function loadTableConfig(tableName) {
     try {
         showLoading('Načítám konfiguraci...', 'Připravuji filtry');
         
-        const response = await fetch(`${baseUrl}${tableName}.json`);
+        // Test URL patterns if not done yet
+        if (!urlTestingDone) {
+            baseUrl = await findWorkingBaseUrl(tableName);
+            urlTestingDone = true;
+        }
+        
+        const url = `${baseUrl}${tableName}.json`;
+        console.log('Loading table config from:', url);
+        
+        const response = await fetch(url);
+        console.log('Response status:', response.status);
+        
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            throw new Error(`HTTP error! status: ${response.status}, url: ${url}`);
         }
         
         const data = await response.json();
+        console.log('Loaded table config:', data.name, 'with', Object.keys(data.filters || {}).length, 'filters');
         currentTableConfig = data;
         
         // Set up filters based on table configuration
@@ -99,7 +232,23 @@ async function loadTableConfig(tableName) {
     } catch (error) {
         hideLoading();
         console.error('Error loading table config:', error);
-        showResult(['Chyba při načítání konfigurace tabulky!'], 'error');
+        console.error('Attempted URL:', `${baseUrl}${tableName}.json`);
+        
+        // Try fallback configuration
+        console.log('Trying fallback configuration for:', tableName);
+        const fallbackConfig = fallbackTableConfigs[tableName] || fallbackTableConfigs.default;
+        
+        currentTableConfig = {
+            name: tableName,
+            displayField: fallbackConfig.displayField,
+            filters: fallbackConfig.filters,
+            data: [] // Will be loaded separately
+        };
+        
+        setupDynamicFilters(fallbackConfig.filters);
+        
+        showResult([`Varování: Použita záložní konfigurace pro ${tableName}`, 
+                   'Některé filtry nemusí fungovat správně'], 'error');
     }
 }
 
@@ -189,11 +338,45 @@ async function loadTableData(tableName) {
         
         // If we already have the config loaded, use it
         if (!currentTableConfig) {
-            const response = await fetch(`${baseUrl}${tableName}.json`);
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+            console.warn('No table config loaded, trying to load data only');
+            
+            // Try to load with current baseUrl
+            let url = `${baseUrl}${tableName}.json`;
+            console.log('Loading table data from:', url);
+            
+            let response = await fetch(url);
+            console.log('Data response status:', response.status);
+            
+            // If that fails and we haven't tested URLs yet, try other patterns
+            if (!response.ok && !urlTestingDone) {
+                console.log('Primary URL failed, testing alternatives...');
+                baseUrl = await findWorkingBaseUrl(tableName);
+                urlTestingDone = true;
+                url = `${baseUrl}${tableName}.json`;
+                response = await fetch(url);
             }
-            currentTableConfig = await response.json();
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}, url: ${url}`);
+            }
+            
+            const fullData = await response.json();
+            
+            // If we got the full structure with metadata, use it
+            if (fullData.filters && fullData.displayField) {
+                currentTableConfig = fullData;
+            } else {
+                // Otherwise create a minimal config with the data
+                const fallbackConfig = fallbackTableConfigs[tableName] || fallbackTableConfigs.default;
+                currentTableConfig = {
+                    name: tableName,
+                    displayField: fallbackConfig.displayField,
+                    filters: fallbackConfig.filters,
+                    data: fullData.data || fullData
+                };
+            }
+            
+            console.log('Loaded data for table:', tableName, 'with', currentTableConfig.data?.length || 0, 'entries');
         }
         
         hideLoading();
@@ -202,6 +385,7 @@ async function loadTableData(tableName) {
     } catch (error) {
         hideLoading();
         console.error('Error loading data:', error);
+        console.error('Attempted URL:', `${baseUrl}${tableName}.json`);
         throw error;
     }
 }
