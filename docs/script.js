@@ -4,10 +4,10 @@ let currentTableConfig = null;
 // Try multiple URL patterns to find the correct path
 async function findWorkingBaseUrl(tableName = 'mesta') {
     const possibleUrls = [
-        'DrD-Jmena/drd_table_',                           // Local/relative
+        'DrD-Jmena/drd_table_',                           // Standard relative (docs root)
         './DrD-Jmena/drd_table_',                         // Explicit relative
-        '/draciHlidka/docs/DrD-Jmena/drd_table_',        // GitHub Pages with repo name
-        '/docs/DrD-Jmena/drd_table_',                     // GitHub Pages alternative
+        '/DrD-Jmena/drd_table_',                          // Absolute from site root
+        '/draciHlidka/DrD-Jmena/drd_table_',             // GitHub Pages with repo name
         '../DrD-Jmena/drd_table_',                        // Parent directory
     ];
     
@@ -101,8 +101,8 @@ window.debugDrD = async function() {
     const patterns = [
         'DrD-Jmena/drd_table_',
         './DrD-Jmena/drd_table_',
-        '/draciHlidka/docs/DrD-Jmena/drd_table_',
-        '/docs/DrD-Jmena/drd_table_',
+        '/DrD-Jmena/drd_table_',
+        '/draciHlidka/DrD-Jmena/drd_table_',
         '../DrD-Jmena/drd_table_',
     ];
     

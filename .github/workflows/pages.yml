@@ -28,10 +28,10 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v4
       
-      - name: Copy JSON data to docs
+      - name: Verify JSON data exists
         run: |
-          cp -r DrD-Jmena/ docs/
-          echo "JSON files copied to docs directory"
+          ls -la docs/DrD-Jmena/
+          echo "JSON files are already in docs directory"
       
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
