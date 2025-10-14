@@ -69,3 +69,24 @@ Total entries across all tables: **61,927**
 | drd_table_utesy.json | 47 | Cliffs |
 | drd_table_zatoky.json | 88 | Bays |
 | drd_table_zeme.json | 231 | Lands |
+
+## Project Structure
+
+```
+draciHlidka/
+├── docs/                           # GitHub Pages website
+│   ├── DrD-Jmena/                 # Database files
+│   │   ├── drd_table_*.json       # 36 JSON database tables
+│   │   ├── drd-backup.zip         # Database backup
+│   │   └── drd.sql               # SQL database
+│   ├── index.html                # Main web application
+│   ├── script.js                 # JavaScript functionality
+│   ├── styles.css                # CSS styling
+│   ├── database-stats.html       # Database statistics page
+│   └── database_stats.json       # Statistics data
+├── dungeonGen/                    # Dungeon generation scripts
+│   ├── dungeon-name.js           # Dungeon name generator
+│   └── dungeon.js                # Dungeon structure generator
+├── update_database_stats.py      # Statistics update script
+└── README.md                     # This file
+```

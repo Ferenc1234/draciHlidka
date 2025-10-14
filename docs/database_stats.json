@@ -1,7 +1,7 @@
 {
-  "generated_at": "2025-09-29T08:30:36.725528",
-  "total_files": 37,
-  "total_records": 61929,
+  "generated_at": "2025-10-14T23:13:34.622697",
+  "total_files": 36,
+  "total_records": 41109,
   "tables": {
     "database": {
       "filename": "drd_database.json",
@@ -19,7 +19,7 @@
     },
     "baziny": {
       "filename": "drd_table_baziny.json",
-      "size_bytes": 10958,
+      "size_bytes": 12229,
       "type": "table",
       "name": "baziny",
       "database": "drd",
@@ -39,7 +39,7 @@
     },
     "brody": {
       "filename": "drd_table_brody.json",
-      "size_bytes": 12184,
+      "size_bytes": 13637,
       "type": "table",
       "name": "brody",
       "database": "drd",
@@ -59,7 +59,7 @@
     },
     "domy": {
       "filename": "drd_table_domy.json",
-      "size_bytes": 25613,
+      "size_bytes": 29683,
       "type": "table",
       "name": "domy",
       "database": "drd",
@@ -83,7 +83,7 @@
     },
     "drd_sklonovani": {
       "filename": "drd_table_drd_sklonovani.json",
-      "size_bytes": 43329,
+      "size_bytes": 48093,
       "type": "table",
       "name": "drd_sklonovani",
       "database": "drd",
@@ -105,7 +105,7 @@
     },
     "drd_tabulky": {
       "filename": "drd_table_drd_tabulky.json",
-      "size_bytes": 3097,
+      "size_bytes": 4067,
       "type": "table",
       "name": "drd_tabulky",
       "database": "drd",
@@ -120,7 +120,7 @@
     },
     "hory": {
       "filename": "drd_table_hory.json",
-      "size_bytes": 43223,
+      "size_bytes": 48285,
       "type": "table",
       "name": "hory",
       "database": "drd",
@@ -140,7 +140,7 @@
     },
     "hrady": {
       "filename": "drd_table_hrady.json",
-      "size_bytes": 38420,
+      "size_bytes": 43508,
       "type": "table",
       "name": "hrady",
       "database": "drd",
@@ -160,7 +160,7 @@
     },
     "jeskyne": {
       "filename": "drd_table_jeskyne.json",
-      "size_bytes": 17913,
+      "size_bytes": 19834,
       "type": "table",
       "name": "jeskyne",
       "database": "drd",
@@ -180,7 +180,7 @@
     },
     "jezera": {
       "filename": "drd_table_jezera.json",
-      "size_bytes": 42756,
+      "size_bytes": 47324,
       "type": "table",
       "name": "jezera",
       "database": "drd",
@@ -199,8 +199,8 @@
       "field_count": 9
     },
     "jmena": {
-      "filename": "drd_table_jmena_upraveno.json",
-      "size_bytes": 14261510,
+      "filename": "drd_table_jmena.json",
+      "size_bytes": 11223386,
       "type": "table",
       "name": "jmena",
       "database": "drd",
@@ -234,7 +234,7 @@
     },
     "jmena_ekvivalence": {
       "filename": "drd_table_jmena_ekvivalence.json",
-      "size_bytes": 265474,
+      "size_bytes": 322841,
       "type": "table",
       "name": "jmena_ekvivalence",
       "database": "drd",
@@ -248,7 +248,7 @@
     },
     "ledovce": {
       "filename": "drd_table_ledovce.json",
-      "size_bytes": 9597,
+      "size_bytes": 10738,
       "type": "table",
       "name": "ledovce",
       "database": "drd",
@@ -268,7 +268,7 @@
     },
     "lesy": {
       "filename": "drd_table_lesy.json",
-      "size_bytes": 42252,
+      "size_bytes": 46978,
       "type": "table",
       "name": "lesy",
       "database": "drd",
@@ -288,7 +288,7 @@
     },
     "lode": {
       "filename": "drd_table_lode.json",
-      "size_bytes": 26516,
+      "size_bytes": 30020,
       "type": "table",
       "name": "lode",
       "database": "drd",
@@ -308,7 +308,7 @@
     },
     "mesta": {
       "filename": "drd_table_mesta.json",
-      "size_bytes": 1889765,
+      "size_bytes": 2116789,
       "type": "table",
       "name": "mesta",
       "database": "drd",
@@ -328,7 +328,7 @@
     },
     "more": {
       "filename": "drd_table_more.json",
-      "size_bytes": 18860,
+      "size_bytes": 21140,
       "type": "table",
       "name": "more",
       "database": "drd",
@@ -348,7 +348,7 @@
     },
     "mysy": {
       "filename": "drd_table_mysy.json",
-      "size_bytes": 12198,
+      "size_bytes": 13651,
       "type": "table",
       "name": "mysy",
       "database": "drd",
@@ -368,7 +368,7 @@
     },
     "ostrovy": {
       "filename": "drd_table_ostrovy.json",
-      "size_bytes": 44387,
+      "size_bytes": 48827,
       "type": "table",
       "name": "ostrovy",
       "database": "drd",
@@ -388,7 +388,7 @@
     },
     "plane": {
       "filename": "drd_table_plane.json",
-      "size_bytes": 14004,
+      "size_bytes": 15613,
       "type": "table",
       "name": "plane",
       "database": "drd",
@@ -408,7 +408,7 @@
     },
     "pohori": {
       "filename": "drd_table_pohori.json",
-      "size_bytes": 28588,
+      "size_bytes": 31830,
       "type": "table",
       "name": "pohori",
       "database": "drd",
@@ -428,7 +428,7 @@
     },
     "pouste": {
       "filename": "drd_table_pouste.json",
-      "size_bytes": 11632,
+      "size_bytes": 12955,
       "type": "table",
       "name": "pouste",
       "database": "drd",
@@ -448,7 +448,7 @@
     },
     "pridomky": {
       "filename": "drd_table_pridomky.json",
-      "size_bytes": 277467,
+      "size_bytes": 309476,
       "type": "table",
       "name": "pridomky",
       "database": "drd",
@@ -468,7 +468,7 @@
     },
     "prijmeni": {
       "filename": "drd_table_prijmeni.json",
-      "size_bytes": 768586,
+      "size_bytes": 844920,
       "type": "table",
       "name": "prijmeni",
       "database": "drd",
@@ -501,7 +501,7 @@
     },
     "prusmyky": {
       "filename": "drd_table_prusmyky.json",
-      "size_bytes": 13083,
+      "size_bytes": 14484,
       "type": "table",
       "name": "prusmyky",
       "database": "drd",
@@ -521,7 +521,7 @@
     },
     "reky": {
       "filename": "drd_table_reky.json",
-      "size_bytes": 51972,
+      "size_bytes": 58854,
       "type": "table",
       "name": "reky",
       "database": "drd",
@@ -541,7 +541,7 @@
     },
     "rokle": {
       "filename": "drd_table_rokle.json",
-      "size_bytes": 11162,
+      "size_bytes": 12612,
       "type": "table",
       "name": "rokle",
       "database": "drd",
@@ -561,7 +561,7 @@
     },
     "soutesky": {
       "filename": "drd_table_soutesky.json",
-      "size_bytes": 11822,
+      "size_bytes": 13119,
       "type": "table",
       "name": "soutesky",
       "database": "drd",
@@ -581,7 +581,7 @@
     },
     "stepi": {
       "filename": "drd_table_stepi.json",
-      "size_bytes": 13031,
+      "size_bytes": 14562,
       "type": "table",
       "name": "stepi",
       "database": "drd",
@@ -601,7 +601,7 @@
     },
     "udelat_jmena": {
       "filename": "drd_table_udelat_jmena.json",
-      "size_bytes": 66548,
+      "size_bytes": 80191,
       "type": "table",
       "name": "udelat_jmena",
       "database": "drd",
@@ -615,7 +615,7 @@
     },
     "udoli": {
       "filename": "drd_table_udoli.json",
-      "size_bytes": 19499,
+      "size_bytes": 21701,
       "type": "table",
       "name": "udoli",
       "database": "drd",
@@ -635,7 +635,7 @@
     },
     "ulice": {
       "filename": "drd_table_ulice_original.json",
-      "size_bytes": 175137,
+      "size_bytes": 195244,
       "type": "table",
       "name": "ulice",
       "database": "drd",
@@ -655,7 +655,7 @@
     },
     "utesy": {
       "filename": "drd_table_utesy.json",
-      "size_bytes": 12585,
+      "size_bytes": 14012,
       "type": "table",
       "name": "utesy",
       "database": "drd",
@@ -675,7 +675,7 @@
     },
     "zatoky": {
       "filename": "drd_table_zatoky.json",
-      "size_bytes": 23231,
+      "size_bytes": 25724,
       "type": "table",
       "name": "zatoky",
       "database": "drd",
@@ -695,7 +695,7 @@
     },
     "zeme": {
       "filename": "drd_table_zeme.json",
-      "size_bytes": 48394,
+      "size_bytes": 54756,
       "type": "table",
       "name": "zeme",
       "database": "drd",
@@ -717,11 +717,11 @@
   "summary": {
     "table_types": {
       "array": 1,
-      "table": 36
+      "table": 35
     },
     "largest_table": "jmena",
-    "average_records_per_table": 1673.76
+    "average_records_per_table": 1141.92
   },
-  "total_size_bytes": 28235130,
-  "total_size_mb": 26.93
+  "total_size_bytes": 15929969,
+  "total_size_mb": 15.19
 }

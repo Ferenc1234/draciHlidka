@@ -31,6 +31,11 @@ class DatabaseStatsUpdater:
         
         for filename in os.listdir(self.docs_dir):
             if filename.endswith('.json'):
+                # Vynech deprecated soubory
+                if 'deprecated' in filename.lower():
+                    print(f"Přeskakuji deprecated soubor: {filename}")
+                    continue
+                    
                 filepath = os.path.join(self.docs_dir, filename)
                 json_files.append(filepath)
         
