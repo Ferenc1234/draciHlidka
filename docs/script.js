@@ -409,6 +409,12 @@ function applyFilters(data, tableName) {
         } else if (filterKey === 'race' || filterKey === 'class') {
             // Race/class filters - check if the field equals '1'
             filtered = filtered.filter(item => item[filterValue] === '1');
+        } else {
+            // Generic binary or direct field filters
+            filtered = filtered.filter(item => {
+                const itemValue = item[filterConfig.field];
+                return itemValue === filterValue;
+            });
         }
     });
     
