@@ -2,6 +2,18 @@
     "type": "table",
     "name": "mesta",
     "database": "drd",
+    "displayField": "nazev",
+    "filters": {
+        "gender": {
+            "field": "rod",
+            "label": "Rod",
+            "options": [
+                {"value": "M", "label": "Mužský"},
+                {"value": "F", "label": "Ženský"},
+                {"value": "N", "label": "Střední"}
+            ]
+        }
+    },
     "data": 
 [
 {

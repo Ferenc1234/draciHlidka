@@ -2,6 +2,22 @@
     "type": "table",
     "name": "prijmeni",
     "database": "drd",
+    "displayField": "prijmeni",
+    "filters": {
+        "race": {
+            "field": "race",
+            "label": "Rasa",
+            "options": [
+                {"value": "clovek", "label": "Člověk"},
+                {"value": "elf", "label": "Elf"},
+                {"value": "trpaslik", "label": "Trpaslík"},
+                {"value": "hobit", "label": "Hobit"},
+                {"value": "kuduk", "label": "Kuduk"},
+                {"value": "kroll", "label": "Kroll"},
+                {"value": "barbar", "label": "Barbar"}
+            ]
+        }
+    },
     "data": 
 [
 {

@@ -2,6 +2,41 @@
     "type": "table",
     "name": "jmena",
     "database": "drd",
+    "displayField": "jmeno",
+    "filters": {
+        "gender": {
+            "field": "pohlavi",
+            "label": "Rod",
+            "options": [
+                {"value": "M", "label": "Mužský"},
+                {"value": "F", "label": "Ženský"}
+            ]
+        },
+        "race": {
+            "field": "race",
+            "label": "Rasa",
+            "options": [
+                {"value": "clovek", "label": "Člověk"},
+                {"value": "elf", "label": "Elf"},
+                {"value": "trpaslik", "label": "Trpaslík"},
+                {"value": "hobit", "label": "Hobit"},
+                {"value": "kuduk", "label": "Kuduk"},
+                {"value": "kroll", "label": "Kroll"},
+                {"value": "barbar", "label": "Barbar"}
+            ]
+        },
+        "class": {
+            "field": "class",
+            "label": "Povolání",
+            "options": [
+                {"value": "valecnik", "label": "Válečník"},
+                {"value": "hranicar", "label": "Hraničář"},
+                {"value": "alchymista", "label": "Alchymista"},
+                {"value": "kouzelnik", "label": "Kouzelník"},
+                {"value": "zlodej", "label": "Zloděj"}
+            ]
+        }
+    },
     "data": 
 [
 {
